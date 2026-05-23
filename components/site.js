@@ -91,8 +91,8 @@ export function Navbar() {
     <header className="sticky top-0 z-50 border-b border-white/10 bg-[#0B0616]/85 backdrop-blur-xl">
       <div className="section-shell flex items-center justify-between py-4">
         <Link href="/" className="flex items-center gap-3">
-          <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-button-gradient text-sm font-semibold text-white shadow-glow">
-            JK
+          <div className="relative h-11 w-11">
+            <Image src="/logo.png" alt="Jubayer Khan logo" fill priority className="object-cover" />
           </div>
           <div>
             <p className="text-sm uppercase tracking-[0.35em] text-white/45">Portfolio</p>

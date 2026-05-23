@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { motion } from "framer-motion";
 import toast from "react-hot-toast";
 import { FiLock, FiMail, FiUser, FiEye, FiArrowLeft } from "react-icons/fi";
-import { signIn } from "@/lib/auth-client";
+import { signIn, signUp } from "@/lib/auth-client";
 import api from "@/lib/api";
 
 function getReadableErrorMessage(error, fallback = "Authentication failed") {
@@ -26,6 +26,14 @@ function getReadableErrorMessage(error, fallback = "Authentication failed") {
   return fallback;
 }
 
+function getAppOrigin() {
+  if (typeof window !== "undefined" && window.location?.origin) {
+    return window.location.origin;
+  }
+
+  return process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
+}
+
 export function AuthPage() {
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -36,13 +44,36 @@ export function AuthPage() {
 
   const onSubmit = async (formData) => {
     try {
+      const callbackURL = `${getAppOrigin()}/dashboard`;
+
       if (mode === "signup") {
-        await api.post("/auth/register", formData);
+        const result = await signUp.email({
+          name: formData.name,
+          email: formData.email,
+          password: formData.password,
+          callbackURL,
+        });
+
+        if (result?.error) {
+          throw new Error(result.error.message || "Registration failed");
+        }
+
         toast.success("Account created successfully");
       } else {
-        await api.post("/auth/login", formData);
+        const result = await signIn.email({
+          email: formData.email,
+          password: formData.password,
+          callbackURL,
+        });
+
+        if (result?.error) {
+          throw new Error(result.error.message || "Login failed");
+        }
+
         toast.success("Logged in successfully");
       }
+
+      await api.get("/auth/session");
 
       router.push("/dashboard");
       router.refresh();
@@ -53,12 +84,16 @@ export function AuthPage() {
 
   const handleGoogleSignIn = async () => {
     try {
-      await signIn.social({
+      const result = await signIn.social({
         provider: "google",
-        callbackURL: `${process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"}/dashboard`,
+        callbackURL: `${getAppOrigin()}/dashboard`,
       });
+
+      if (result?.error) {
+        throw new Error(result.error.message || "Google sign-in failed");
+      }
     } catch (error) {
-      toast.error("Google sign-in failed");
+      toast.error(getReadableErrorMessage(error, "Google sign-in failed. Check your Google OAuth settings and allowed redirect URI."));
     }
   };
 
