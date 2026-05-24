@@ -10,7 +10,6 @@ import { FaGithub, FaLinkedin, FaFacebook, FaEnvelope } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import api, { fetchServices, submitContactMessage, createOrder } from "@/lib/api";
-import { authClient } from "@/lib/auth-client";
 import {
   navigationLinks,
   heroRotatingTitles,
@@ -75,17 +74,13 @@ export function Navbar() {
   const router = useRouter();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
-  const { data: session } = authClient.useSession();
+  
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  const handleLogout = async () => {
-    await api.post("/auth/logout");
-    toast.success("Logged out successfully");
-    router.push("/");
-  };
+  
 
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-[#0B0616]/85 backdrop-blur-xl">
@@ -109,25 +104,9 @@ export function Navbar() {
         </nav>
 
         <div className="hidden items-center gap-3 lg:flex">
-          {mounted && session?.user ? (
-            <>
-              <Link href="/dashboard" className="rounded-full border border-white/10 px-5 py-2 text-sm text-white/80 transition hover:bg-white/10">
-                Dashboard
-              </Link>
-              <button onClick={handleLogout} className="rounded-full bg-button-gradient px-5 py-2 text-sm font-medium text-white shadow-glow transition hover:scale-[1.02]">
-                Logout
-              </button>
-            </>
-          ) : mounted ? (
-            <>
-              <Link href="/auth" className="rounded-full border border-white/10 px-5 py-2 text-sm text-white/80 transition hover:bg-white/10">
-                Login
-              </Link>
-              <Link href="/auth?mode=signup" className="rounded-full bg-button-gradient px-5 py-2 text-sm font-medium text-white shadow-glow transition hover:scale-[1.02]">
-                Signup
-              </Link>
-            </>
-          ) : null}
+          <button onClick={() => router.push('/#contact')} className="rounded-full bg-button-gradient px-5 py-2 text-sm font-medium text-white shadow-glow transition hover:scale-[1.02]">
+            Hire Me
+          </button>
         </div>
 
         <button className="rounded-full border border-white/10 p-3 text-white lg:hidden" onClick={() => setMobileOpen((current) => !current)}>
@@ -144,17 +123,7 @@ export function Navbar() {
                   {item.label}
                 </a>
               ))}
-              {mounted && session?.user ? (
-                <>
-                  <Link href="/dashboard" className="rounded-2xl bg-white/10 px-4 py-3 text-white">Dashboard</Link>
-                  <button onClick={handleLogout} className="rounded-2xl bg-button-gradient px-4 py-3 text-left text-white">Logout</button>
-                </>
-              ) : mounted ? (
-                <>
-                  <Link href="/auth" className="rounded-2xl bg-white/10 px-4 py-3 text-white">Login</Link>
-                  <Link href="/auth?mode=signup" className="rounded-2xl bg-button-gradient px-4 py-3 text-white">Signup</Link>
-                </>
-              ) : null}
+              <Link href="/#contact" onClick={() => setMobileOpen(false)} className="rounded-2xl bg-button-gradient px-4 py-3 text-white">Hire Me</Link>
             </div>
           </motion.div>
         ) : null}
@@ -167,7 +136,6 @@ export function HeroSection() {
   const router = useRouter();
   const [titleIndex, setTitleIndex] = useState(0);
   const [mounted, setMounted] = useState(false);
-  const { data: session } = authClient.useSession();
 
   useEffect(() => {
     setMounted(true);
@@ -220,17 +188,13 @@ export function HeroSection() {
           </p>
 
           <div className="flex flex-wrap items-center gap-4">
-            <button onClick={() => router.push("/auth?mode=signup")} className="rounded-full bg-button-gradient px-8 py-3 font-medium text-white shadow-glow transition hover:scale-[1.02]">
+            <button onClick={() => router.push("/#contact")} className="rounded-full bg-button-gradient px-8 py-3 font-medium text-white shadow-glow transition hover:scale-[1.02]">
               Hire Me
             </button>
             <button onClick={handleResume} className="flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-8 py-3 font-medium text-white/80 transition hover:bg-white/10">
               <FiDownload /> Download Resume
             </button>
-            {mounted && session?.user ? (
-              <Link href="/dashboard" className="flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-8 py-3 font-medium text-white/80 transition hover:bg-white/10">
-                <FiUser /> Dashboard
-              </Link>
-            ) : null}
+            
           </div>
 
           <div className="grid gap-4 pt-4 sm:grid-cols-3">
@@ -370,7 +334,6 @@ export function SkillsSection() {
 export function ServicesSection() {
   const [services, setServices] = useState(defaultServices);
   const router = useRouter();
-  const { data: session } = authClient.useSession();
 
   useEffect(() => {
     fetchServices().then((items) => {
@@ -381,15 +344,8 @@ export function ServicesSection() {
   }, []);
 
   const handleOrder = async (service) => {
-    if (!session?.user) {
-      toast("Sign in to place an order");
-      router.push("/auth");
-      return;
-    }
-
-    await createOrder({ serviceId: service._id });
-    toast.success(`${service.title} order created`);
-    router.push("/dashboard/user");
+    toast("Please contact to place an order");
+    router.push("/#contact");
   };
 
   return (

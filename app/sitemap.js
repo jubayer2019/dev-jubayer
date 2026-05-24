@@ -3,7 +3,6 @@ export default function sitemap() {
 
   return [
     { url: baseUrl, lastModified: new Date() },
-    { url: `${baseUrl}/auth`, lastModified: new Date() },
     { url: `${baseUrl}/dashboard`, lastModified: new Date() },
   ];
 }

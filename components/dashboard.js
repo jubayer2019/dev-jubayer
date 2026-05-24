@@ -7,8 +7,7 @@ import { motion } from "framer-motion";
 import { FiBarChart2, FiLogOut, FiPackage, FiUsers, FiCheckCircle, FiDownload, FiSettings } from "react-icons/fi";
 import toast from "react-hot-toast";
 import jsPDF from "jspdf";
-import api, { fetchDashboardOrders, fetchDashboardUsers, fetchSessionProfile } from "@/lib/api";
-import { authClient } from "@/lib/auth-client";
+import api, { fetchDashboardOrders, fetchDashboardUsers } from "@/lib/api";
 import { dashboardStatuses, defaultOrders } from "@/lib/data";
 
 function ProgressChart({ orders }) {
@@ -53,29 +52,22 @@ export function DashboardShell({ children, mode = "user" }) {
   const [profile, setProfile] = useState(null);
   const [orders, setOrders] = useState(defaultOrders);
   const [users, setUsers] = useState([]);
-  const { data: session } = authClient.useSession();
 
   useEffect(() => {
     async function load() {
       try {
-        const currentSession = await fetchSessionProfile();
-        if (!currentSession?.user) {
-          toast.error("Please log in first");
-          router.push("/auth");
-          return;
-        }
-
-        setProfile(currentSession.user);
         const fetchedOrders = await fetchDashboardOrders();
         setOrders(fetchedOrders.length ? fetchedOrders : defaultOrders);
 
-        if (currentSession.user.role === "admin") {
+        try {
           const fetchedUsers = await fetchDashboardUsers();
           setUsers(fetchedUsers);
+        } catch {
+          setUsers([]);
         }
       } catch (error) {
-        toast.error("Unable to load dashboard");
-        router.push("/auth");
+        toast.error("Dashboard requires authentication or server access");
+        router.push("/");
       }
     }
 
@@ -83,8 +75,6 @@ export function DashboardShell({ children, mode = "user" }) {
   }, [router, session]);
 
   const handleLogout = async () => {
-    await api.post("/auth/logout");
-    toast.success("Logged out");
     router.push("/");
   };
 

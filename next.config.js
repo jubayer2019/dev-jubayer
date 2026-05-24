@@ -10,10 +10,7 @@ const nextConfig = {
     const apiTarget = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
 
     return [
-      {
-        source: "/api/auth/:path*",
-        destination: `${apiTarget}/api/auth/:path*`,
-      },
+      
       {
         source: "/api/:path*",
         destination: `${apiTarget}/:path*`,
