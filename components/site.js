@@ -137,6 +137,8 @@ export function HeroSection() {
   const router = useRouter();
   const [titleIndex, setTitleIndex] = useState(0);
   const [mounted, setMounted] = useState(false);
+  const [resumePreviewOpen, setResumePreviewOpen] = useState(false);
+  const resumePdfUrl = "/Jubayer%20Khan%20Resume.pdf";
 
   useEffect(() => {
     setMounted(true);
@@ -149,12 +151,24 @@ export function HeroSection() {
     return () => clearInterval(timer);
   }, []);
 
-  const handleResume = () => {
-    toast.success("Resume download started");
-  };
+  useEffect(() => {
+    if (!resumePreviewOpen) {
+      return undefined;
+    }
+
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") {
+        setResumePreviewOpen(false);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [resumePreviewOpen]);
 
   return (
-    <section id="home" className="hero-glow relative overflow-hidden py-24 md:py-32">
+    <>
+      <section id="home" className="hero-glow relative overflow-hidden py-24 md:py-32">
       <div className="absolute inset-0 grid-glow opacity-20" />
       <div className="section-shell relative grid items-center gap-14 lg:grid-cols-[1.2fr_0.8fr]">
         <div className="space-y-8">
@@ -192,7 +206,7 @@ export function HeroSection() {
             <button onClick={() => router.push("/#contact")} className="rounded-full bg-button-gradient px-8 py-3 font-medium text-white shadow-glow transition hover:scale-[1.02]">
               Hire Me
             </button>
-            <button onClick={handleResume} className="flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-8 py-3 font-medium text-white/80 transition hover:bg-white/10">
+            <button type="button" onClick={() => setResumePreviewOpen(true)} className="flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-8 py-3 font-medium text-white/80 transition hover:bg-white/10">
               <FiDownload /> Download Resume
             </button>
             
@@ -231,7 +245,61 @@ export function HeroSection() {
           </div>
         </motion.div>
       </div>
-    </section>
+      </section>
+
+      <AnimatePresence>
+        {resumePreviewOpen ? (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[60] flex items-center justify-center bg-black/75 px-4 py-6 backdrop-blur-sm"
+            onClick={() => setResumePreviewOpen(false)}
+          >
+            <motion.div
+              initial={{ y: 24, opacity: 0, scale: 0.98 }}
+              animate={{ y: 0, opacity: 1, scale: 1 }}
+              exit={{ y: 24, opacity: 0, scale: 0.98 }}
+              transition={{ duration: 0.22 }}
+              className="relative w-full max-w-5xl overflow-hidden rounded-[2rem] border border-white/10 bg-[#12091f] shadow-2xl"
+              onClick={(event) => event.stopPropagation()}
+            >
+              <button onClick={() => setResumePreviewOpen(false)} className="absolute right-4 top-4 rounded-full border border-white/10 bg-white/10 p-2 text-white transition hover:bg-white/20" aria-label="Close resume preview">
+                <FiX />
+              </button>
+
+              <div className="grid gap-0 lg:grid-cols-[1.15fr_0.85fr]">
+                <div className="bg-black/20 p-4 sm:p-6">
+                  <div className="overflow-hidden rounded-[1.5rem] border border-white/10 bg-white">
+                    <iframe title="Resume preview" src={resumePdfUrl} className="h-[72vh] w-full" />
+                  </div>
+                </div>
+
+                <div className="space-y-5 p-6 sm:p-8">
+                  <div>
+                    <p className="text-sm uppercase tracking-[0.4em] text-white/40">Resume</p>
+                    <h3 className="mt-3 text-3xl font-semibold text-white">Preview and download the PDF</h3>
+                    <p className="mt-3 text-white/65 leading-8">Open the file in the browser preview, then use the download button to save a copy locally.</p>
+                  </div>
+
+                  <div className="space-y-3">
+                    <a href={resumePdfUrl} download className="block rounded-full bg-button-gradient px-5 py-3 text-center font-medium text-white shadow-glow transition hover:scale-[1.02]">
+                      Download PDF
+                    </a>
+                    <a href={resumePdfUrl} target="_blank" rel="noreferrer" className="block rounded-full border border-white/15 bg-white/5 px-5 py-3 text-center font-medium text-white/80 transition hover:bg-white/10">
+                      Open in New Tab
+                    </a>
+                    <button type="button" onClick={() => setResumePreviewOpen(false)} className="w-full rounded-full border border-white/15 px-5 py-3 font-medium text-white/70 transition hover:bg-white/5">
+                      Close Preview
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
+    </>
   );
 }
 

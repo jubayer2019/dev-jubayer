@@ -72,7 +72,7 @@ export function DashboardShell({ children, mode = "user" }) {
     }
 
     load();
-  }, [router, session]);
+  }, [router]);
 
   const handleLogout = async () => {
     router.push("/");
@@ -354,24 +354,5 @@ export function UserDashboardPage() {
 }
 
 export function AdminDashboardPage() {
-  const { data: session } = authClient.useSession();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (mounted && session?.user && session.user.role !== "admin") {
-    return (
-      <div className="space-y-6">
-        <div className="glass-panel rounded-[2rem] p-8">
-          <p className="text-sm uppercase tracking-[0.45em] text-white/35">Access denied</p>
-          <h3 className="mt-4 text-3xl font-semibold text-white">Admin access is required for this area.</h3>
-          <p className="mt-3 text-white/60">Use an admin account to manage users, orders, and services.</p>
-        </div>
-      </div>
-    );
-  }
-
   return <AdminBoard />;
 }
