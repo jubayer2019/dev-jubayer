@@ -1,0 +1,18 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="800" rx="48" fill="url(#paint0_linear_2_2)"/>
+  <circle cx="900" cy="220" r="200" fill="#7C3AED" fill-opacity="0.18"/>
+  <circle cx="260" cy="600" r="190" fill="#F59E0B" fill-opacity="0.16"/>
+  <rect x="110" y="110" width="980" height="580" rx="36" fill="white" fill-opacity="0.08" stroke="white" stroke-opacity="0.12"/>
+  <rect x="178" y="198" width="288" height="340" rx="30" fill="white" fill-opacity="0.08"/>
+  <rect x="508" y="198" width="514" height="110" rx="30" fill="white" fill-opacity="0.08"/>
+  <rect x="508" y="336" width="514" height="202" rx="30" fill="#7C3AED" fill-opacity="0.2"/>
+  <text x="140" y="200" fill="white" fill-opacity="0.9" font-family="Arial, sans-serif" font-size="34" letter-spacing="8">PORTFOLIO</text>
+  <text x="140" y="274" fill="white" font-family="Arial, sans-serif" font-size="72" font-weight="700">Dashboard Flow</text>
+  <defs>
+    <linearGradient id="paint0_linear_2_2" x1="120" y1="80" x2="1100" y2="760" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0B1220"/>
+      <stop offset="0.55" stop-color="#18122B"/>
+      <stop offset="1" stop-color="#2B1A4A"/>
+    </linearGradient>
+  </defs>
+</svg>

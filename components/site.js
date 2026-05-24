@@ -16,6 +16,7 @@ import {
   overviewStats,
   educationTimeline,
   skillGroups,
+  portfolioProjects,
   packageCards,
   socialLinks,
   defaultServices,
@@ -86,11 +87,11 @@ export function Navbar() {
     <header className="sticky top-0 z-50 border-b border-white/10 bg-[#0B0616]/85 backdrop-blur-xl">
       <div className="section-shell flex items-center justify-between py-4">
         <Link href="/" className="flex items-center gap-3">
-          <div className="relative h-11 w-11">
-            <Image src="/logo.png" alt="Jubayer Khan logo" fill priority className="object-cover" />
+          <div className="relative h-14 w-14 sm:h-16 sm:w-16">
+            <Image src="/logo.png" alt="Jubayer Khan logo" fill priority className="object-contain p-1" />
           </div>
           <div>
-            <p className="text-sm uppercase tracking-[0.35em] text-white/45">Portfolio</p>
+            
             <h1 className="text-lg font-semibold text-white">Jubayer Khan</h1>
           </div>
         </Link>
@@ -331,6 +332,142 @@ export function SkillsSection() {
   );
 }
 
+export function PortfolioSection() {
+  const [selectedProject, setSelectedProject] = useState(null);
+
+  useEffect(() => {
+    if (!selectedProject) {
+      return undefined;
+    }
+
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") {
+        setSelectedProject(null);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [selectedProject]);
+
+  return (
+    <>
+      <section id="portfolio" className="py-24">
+        <div className="section-shell space-y-10">
+          <div className="max-w-2xl space-y-4">
+            <p className="text-sm uppercase tracking-[0.45em] text-white/45">Portfolio</p>
+            <h3 className="text-4xl font-semibold text-white">Selected projects designed to feel polished, usable, and conversion-focused.</h3>
+            <p className="text-white/65 leading-8">A mix of product, dashboard, marketing, and admin concepts with live preview access and deeper project details.</p>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+            {portfolioProjects.map((project) => (
+              <motion.article key={project.title} whileHover={{ y: -8 }} className="glass-panel overflow-hidden rounded-[2rem] border border-white/10">
+                <div className="relative aspect-[16/10] overflow-hidden">
+                  <Image src={project.thumbnail} alt={`${project.title} thumbnail`} fill className="object-cover" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0B0616] via-transparent to-transparent" />
+                  <div className="absolute left-4 top-4 rounded-full border border-white/10 bg-white/10 px-3 py-1 text-xs uppercase tracking-[0.3em] text-white/75 backdrop-blur-xl">
+                    {project.category}
+                  </div>
+                </div>
+
+                <div className="space-y-4 p-5">
+                  <div>
+                    <h4 className="text-2xl font-semibold text-white">{project.title}</h4>
+                    <p className="mt-2 text-sm leading-7 text-white/65">{project.shortDescription}</p>
+                  </div>
+
+                  <div className="flex flex-wrap gap-3">
+                    <a href={project.livePreview} target="_blank" rel="noreferrer" className="rounded-full bg-button-gradient px-4 py-2 text-sm font-medium text-white shadow-glow transition hover:scale-[1.02]">
+                      Live Preview
+                    </a>
+                    <button onClick={() => setSelectedProject(project)} className="rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm font-medium text-white/80 transition hover:bg-white/10">
+                      Details
+                    </button>
+                  </div>
+                </div>
+              </motion.article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <AnimatePresence>
+        {selectedProject ? (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[60] flex items-center justify-center bg-black/70 px-4 py-6 backdrop-blur-sm"
+            onClick={() => setSelectedProject(null)}
+          >
+            <motion.div
+              initial={{ y: 24, opacity: 0, scale: 0.98 }}
+              animate={{ y: 0, opacity: 1, scale: 1 }}
+              exit={{ y: 24, opacity: 0, scale: 0.98 }}
+              transition={{ duration: 0.22 }}
+              className="relative w-full max-w-4xl overflow-hidden rounded-[2rem] border border-white/10 bg-[#12091f] shadow-2xl"
+              onClick={(event) => event.stopPropagation()}
+            >
+              <button onClick={() => setSelectedProject(null)} className="absolute right-4 top-4 rounded-full border border-white/10 bg-white/10 p-2 text-white transition hover:bg-white/20" aria-label="Close project details">
+                <FiX />
+              </button>
+
+              <div className="grid gap-6 p-6 lg:grid-cols-[0.95fr_1.05fr] lg:p-8">
+                <div className="relative aspect-[4/3] overflow-hidden rounded-[1.6rem] border border-white/10">
+                  <Image src={selectedProject.thumbnail} alt={`${selectedProject.title} thumbnail`} fill className="object-cover" />
+                </div>
+
+                <div className="space-y-5">
+                  <div>
+                    <p className="text-sm uppercase tracking-[0.4em] text-white/40">Project Details</p>
+                    <h4 className="mt-3 text-3xl font-semibold text-white">{selectedProject.title}</h4>
+                    <p className="mt-2 text-sm text-white/50">{selectedProject.category}</p>
+                  </div>
+
+                  <p className="text-white/70 leading-8">{selectedProject.longDescription}</p>
+
+                  <div>
+                    <p className="text-sm uppercase tracking-[0.35em] text-white/40">Tech Stack</p>
+                    <div className="mt-3 flex flex-wrap gap-2">
+                      {selectedProject.techStack.map((tech) => (
+                        <span key={tech} className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-sm text-white/75">
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div>
+                    <p className="text-sm uppercase tracking-[0.35em] text-white/40">Highlights</p>
+                    <ul className="mt-3 space-y-3 text-white/70">
+                      {selectedProject.highlights.map((highlight) => (
+                        <li key={highlight} className="flex items-start gap-3">
+                          <span className="mt-2 h-2 w-2 rounded-full bg-magenta shadow-glow" />
+                          <span>{highlight}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="flex flex-wrap gap-3 pt-2">
+                    <a href={selectedProject.livePreview} target="_blank" rel="noreferrer" className="rounded-full bg-button-gradient px-5 py-3 font-medium text-white shadow-glow transition hover:scale-[1.02]">
+                      Open Live Preview
+                    </a>
+                    <button onClick={() => setSelectedProject(null)} className="rounded-full border border-white/15 bg-white/5 px-5 py-3 font-medium text-white/80 transition hover:bg-white/10">
+                      Close
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
+    </>
+  );
+}
+
 export function ServicesSection() {
   const [services, setServices] = useState(defaultServices);
   const router = useRouter();
@@ -461,6 +598,7 @@ export function HomePage() {
       <HeroSection />
       <AboutSection />
       <SkillsSection />
+      <PortfolioSection />
       <ServicesSection />
       <ContactSection />
       <FooterSection />

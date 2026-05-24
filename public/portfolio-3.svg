@@ -1,0 +1,18 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="800" rx="48" fill="url(#paint0_linear_3_3)"/>
+  <circle cx="930" cy="160" r="190" fill="#22C55E" fill-opacity="0.16"/>
+  <circle cx="230" cy="620" r="230" fill="#06B6D4" fill-opacity="0.18"/>
+  <rect x="110" y="110" width="980" height="580" rx="36" fill="white" fill-opacity="0.08" stroke="white" stroke-opacity="0.12"/>
+  <path d="M190 540H970" stroke="white" stroke-opacity="0.45" stroke-width="16" stroke-linecap="round"/>
+  <path d="M220 470H910" stroke="#06B6D4" stroke-width="18" stroke-linecap="round"/>
+  <path d="M250 400H770" stroke="#22C55E" stroke-width="18" stroke-linecap="round"/>
+  <text x="140" y="200" fill="white" fill-opacity="0.9" font-family="Arial, sans-serif" font-size="34" letter-spacing="8">PORTFOLIO</text>
+  <text x="140" y="274" fill="white" font-family="Arial, sans-serif" font-size="72" font-weight="700">Analytics Hub</text>
+  <defs>
+    <linearGradient id="paint0_linear_3_3" x1="120" y1="80" x2="1100" y2="760" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#052E2B"/>
+      <stop offset="0.55" stop-color="#0F2A3B"/>
+      <stop offset="1" stop-color="#111827"/>
+    </linearGradient>
+  </defs>
+</svg>
