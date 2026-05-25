@@ -1,19 +1,19 @@
-<svg width="1200" height="800" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="1200" height="800" rx="48" fill="url(#paint0_linear_6_6)"/>
-  <circle cx="900" cy="220" r="200" fill="#F97316" fill-opacity="0.17"/>
-  <circle cx="240" cy="600" r="220" fill="#FACC15" fill-opacity="0.16"/>
-  <rect x="110" y="110" width="980" height="580" rx="36" fill="white" fill-opacity="0.08" stroke="white" stroke-opacity="0.12"/>
-  <rect x="186" y="194" width="826" height="70" rx="22" fill="white" fill-opacity="0.08"/>
-  <rect x="186" y="288" width="826" height="70" rx="22" fill="#F97316" fill-opacity="0.18"/>
-  <rect x="186" y="382" width="826" height="70" rx="22" fill="white" fill-opacity="0.08"/>
-  <rect x="186" y="476" width="826" height="70" rx="22" fill="#FACC15" fill-opacity="0.2"/>
-  <text x="140" y="200" fill="white" fill-opacity="0.9" font-family="Arial, sans-serif" font-size="34" letter-spacing="8">PORTFOLIO</text>
-  <text x="140" y="274" fill="white" font-family="Arial, sans-serif" font-size="72" font-weight="700">Admin Studio</text>
-  <defs>
-    <linearGradient id="paint0_linear_6_6" x1="120" y1="80" x2="1100" y2="760" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#2A1606"/>
-      <stop offset="0.55" stop-color="#3A1F0A"/>
-      <stop offset="1" stop-color="#111827"/>
-    </linearGradient>
-  </defs>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 26.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 1200 800" style="enable-background:new 0 0 1200 800;" xml:space="preserve">
+<g>
+	<defs>
+		<path id="SVGID_1_" d="M48,0h1104c26.5,0,48,21.5,48,48v704c0,26.5-21.5,48-48,48H48c-26.5,0-48-21.5-48-48V48C0,21.5,21.5,0,48,0
+			z"/>
+	</defs>
+	<clipPath id="SVGID_00000005983471496232502560000017643687531439886233_">
+		<use xlink:href="#SVGID_1_"  style="overflow:visible;"/>
+	</clipPath>
+	<g style="clip-path:url(#SVGID_00000005983471496232502560000017643687531439886233_);">
+		
+			<image style="overflow:visible;" width="1080" height="1080" xlink:href="C:\Users\jubay\Downloads\Friend Tracking.jpg"  transform="matrix(1.1111 0 0 1.1111 0 0)">
+		</image>
+	</g>
+</g>
 </svg>

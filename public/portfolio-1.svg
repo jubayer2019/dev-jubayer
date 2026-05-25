@@ -1,17 +1,19 @@
-<svg width="1200" height="800" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="1200" height="800" rx="48" fill="url(#paint0_linear_1_1)"/>
-  <circle cx="940" cy="170" r="180" fill="#2EE6A6" fill-opacity="0.16"/>
-  <circle cx="260" cy="620" r="220" fill="#FF6A3D" fill-opacity="0.18"/>
-  <rect x="110" y="110" width="980" height="580" rx="36" fill="white" fill-opacity="0.08" stroke="white" stroke-opacity="0.12"/>
-  <path d="M196 548C304 406 410 344 530 344C652 344 754 410 930 250" stroke="white" stroke-opacity="0.8" stroke-width="18" stroke-linecap="round"/>
-  <path d="M206 602C328 496 444 452 560 452C694 452 792 498 924 384" stroke="#2EE6A6" stroke-width="16" stroke-linecap="round"/>
-  <text x="140" y="200" fill="white" fill-opacity="0.9" font-family="Arial, sans-serif" font-size="34" letter-spacing="8">PORTFOLIO</text>
-  <text x="140" y="274" fill="white" font-family="Arial, sans-serif" font-size="72" font-weight="700">Creative Commerce</text>
-  <defs>
-    <linearGradient id="paint0_linear_1_1" x1="120" y1="80" x2="1100" y2="760" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#0F172A"/>
-      <stop offset="0.55" stop-color="#111827"/>
-      <stop offset="1" stop-color="#1F2937"/>
-    </linearGradient>
-  </defs>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 26.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 1200 800" style="enable-background:new 0 0 1200 800;" xml:space="preserve">
+<g>
+	<defs>
+		<path id="SVGID_1_" d="M48,0h1104c26.5,0,48,21.5,48,48v704c0,26.5-21.5,48-48,48H48c-26.5,0-48-21.5-48-48V48C0,21.5,21.5,0,48,0
+			z"/>
+	</defs>
+	<clipPath id="SVGID_00000047050333926385609580000000060451357037526434_">
+		<use xlink:href="#SVGID_1_"  style="overflow:visible;"/>
+	</clipPath>
+	<g transform="matrix(1 0 0 1 0 0)" style="clip-path:url(#SVGID_00000047050333926385609580000000060451357037526434_);">
+		
+			<image style="overflow:visible;" width="3760" height="5494" xlink:href="C:\Users\jubay\Downloads\drivefleet-by-jubayer.vercel.app_.png"  transform="matrix(0.3461 0 0 0.3461 -50.5882 0)">
+		</image>
+	</g>
+</g>
 </svg>
